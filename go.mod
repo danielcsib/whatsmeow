@@ -17,3 +17,4 @@ require (
 )
 
 // personal fork - tracking upstream tulir/whatsmeow for learning purposes
+// note: golang.org/x/crypto should be a direct dependency (used for key ops), not indirect
