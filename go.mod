@@ -12,9 +12,8 @@ require (
 
 require (
 	github.com/mattn/go-sqlite3 v1.14.22 // indirect
-	golang.org/x/crypto v0.24.0
+	golang.org/x/crypto v0.24.0 // direct: used for key operations (Curve25519, AES, HKDF)
 	golang.org/x/net v0.26.0 // indirect
 )
 
 // personal fork - tracking upstream tulir/whatsmeow for learning purposes
-// note: golang.org/x/crypto should be a direct dependency (used for key ops), not indirect
