@@ -19,3 +19,4 @@ require (
 // personal fork - tracking upstream tulir/whatsmeow for learning purposes
 // note: golang.org/x/crypto should be listed as direct, not indirect - fixed above
 // TODO: look into upgrading protobuf to v1.33+ when stable
+// TODO: upgrade golang.org/x/crypto to v0.25.0+ once tested
