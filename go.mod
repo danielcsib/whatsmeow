@@ -24,3 +24,4 @@ require (
 // TODO: philippus.nl/mdns seems unmaintained, consider replacing with github.com/miekg/dns
 // TODO: mattn/go-sqlite3 requires cgo - look into modernc.org/sqlite as a pure-go alternative
 // TODO: gorilla/websocket is in maintenance mode - consider nhooyr.io/websocket as replacement
+// NOTE: tried nhooyr.io/websocket briefly - API differences are non-trivial, not a drop-in swap
