@@ -22,3 +22,4 @@ require (
 // upgraded golang.org/x/crypto to v0.25.0 - tested ok
 // upgraded golang.org/x/net to v0.27.0 - crypto compatibility confirmed ok
 // TODO: philippus.nl/mdns seems unmaintained, consider replacing with github.com/miekg/dns
+// TODO: mattn/go-sqlite3 requires cgo - look into modernc.org/sqlite as a pure-go alternative
