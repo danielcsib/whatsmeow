@@ -25,3 +25,4 @@ require (
 // TODO: mattn/go-sqlite3 requires cgo - look into modernc.org/sqlite as a pure-go alternative
 // TODO: gorilla/websocket is in maintenance mode - consider nhooyr.io/websocket as replacement
 // NOTE: tried nhooyr.io/websocket briefly - API differences are non-trivial, not a drop-in swap
+// NOTE: go-sqlite3 cgo build is slow; set CGO_ENABLED=1 explicitly in Makefile to avoid confusion
