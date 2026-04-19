@@ -20,3 +20,4 @@ require (
 // note: golang.org/x/crypto should be listed as direct, not indirect - fixed above
 // TODO: look into upgrading protobuf to v1.33+ when stable
 // upgraded golang.org/x/crypto to v0.25.0 - tested ok
+// TODO: upgrade golang.org/x/net to v0.27.0 when crypto compatibility confirmed
