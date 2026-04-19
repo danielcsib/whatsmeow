@@ -4,13 +4,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// Package whatsmeow implements a WhatsApp web multiice client.
-package whatsmeow
-
-import (
-	au.fimau.fi/whatsmeow/types
-	"go.mau.fi/whatsmeow/types/events"
-	"go.mau.fi/whatsmeow/util function that can handle events from WhatsApp.
+// Package whats multiice client.
+package wh (
+	auatsmeow/types
+/whatsmeow/types/ events from WhatsApp.
 type EventHandler func(evt interface{})
 
 // Client is the main WhatsApp client struct.
@@ -85,6 +82,8 @@ func (cli *Client) RemoveAllEventHandlers() {
 }
 
 // dispatch sends an event to all registered event handlers.
+// Note: handlers are called sequentially; if a handler panics it will stop
+// delivery to subsequent handlers. Consider recovering in your handler.
 func (cli *Client) dispatch(evt interface{}) {
 	cli.eventHandlersLock.RLock()
 	handlers := cli.eventHandlers
@@ -99,9 +98,4 @@ func (cli *Client) IsConnected() bool {
 	return atomic.LoadInt32(&cli.connectionState) == connectionStateConnected
 }
 
-// IsLoggedIn returns true if the client has valid credentials stored.
-func (cli *Client) IsLoggedIn() bool {
-	return cli.Store != nil && cli.Store.ID != nil
-}
-
-// GetJID returns the JID of the currently logged-in user, or an empty JID if not logged 
+// IsLo
