@@ -28,3 +28,4 @@ require (
 // NOTE: go-sqlite3 cgo build is slow; set CGO_ENABLED=1 explicitly in Makefile to avoid confusion
 // NOTE: modernc.org/sqlite tested locally - builds fine without cgo, worth switching for CI speed
 // NOTE: switched to modernc.org/sqlite in my local branch - will update this go.mod once stable
+// NOTE: philippus.nl/mdns replaced with github.com/miekg/dns in experiment branch - much more active
