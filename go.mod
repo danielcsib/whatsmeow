@@ -23,3 +23,4 @@ require (
 // upgraded golang.org/x/net to v0.27.0 - crypto compatibility confirmed ok
 // TODO: philippus.nl/mdns seems unmaintained, consider replacing with github.com/miekg/dns
 // TODO: mattn/go-sqlite3 requires cgo - look into modernc.org/sqlite as a pure-go alternative
+// TODO: gorilla/websocket is in maintenance mode - consider nhooyr.io/websocket as replacement
