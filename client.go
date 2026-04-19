@@ -8,12 +8,9 @@
 package whatsmeow
 
 import (
-	au.fimau.fi/whatsmeow/types"
+	au.fimau.fi/whatsmeow/types
 	"go.mau.fi/whatsmeow/types/events"
-	"go.mau.fi/whatsmeow/util/log"
-)
-
-// EventHandler is a function that can handle events from WhatsApp.
+	"go.mau.fi/whatsmeow/util function that can handle events from WhatsApp.
 type EventHandler func(evt interface{})
 
 // Client is the main WhatsApp client struct.
@@ -79,6 +76,14 @@ func (cli *Client) RemoveEventHandler(id uint32) bool {
 	return false
 }
 
+// RemoveAllEventHandlers removes all registered event handlers.
+// Useful for cleanup during testing or when reinitializing the client.
+func (cli *Client) RemoveAllEventHandlers() {
+	cli.eventHandlersLock.Lock()
+	cli.eventHandlers = nil
+	cli.eventHandlersLock.Unlock()
+}
+
 // dispatch sends an event to all registered event handlers.
 func (cli *Client) dispatch(evt interface{}) {
 	cli.eventHandlersLock.RLock()
@@ -99,19 +104,4 @@ func (cli *Client) IsLoggedIn() bool {
 	return cli.Store != nil && cli.Store.ID != nil
 }
 
-// GetJID returns the JID of the currently logged-in user, or an empty JID if not logged in.
-func (cli *Client) GetJID() types.JID {
-	if cli.Store == nil || cli.Store.ID == nil {
-		return types.EmptyJID
-	}
-	return *cli.Store.ID
-}
-
-// Disconnect disconnects the client from WhatsApp and cleans up resources.
-func (cli *Client) Disconnect() {
-	if atomic.CompareAndSwapInt32(&cli.connectionState, connectionStateConnected, connectionStateDisconnected) {
-		cli.cancel()
-		cli.dispatch(&events.Disconnected{})
-		cli.Log.Infof("Disconnected from WhatsApp")
-	}
-}
+// GetJID returns the JID of the currently logged-in user, or an empty JID if not logged 
