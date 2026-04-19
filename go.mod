@@ -12,11 +12,11 @@ require (
 
 require (
 	github.com/mattn/go-sqlite3 v1.14.22 // indirect
-	golang.org/x/crypto v0.24.0 // direct: used for key operations (Curve25519, AES, HKDF)
+	golang.org/x/crypto v0.25.0 // direct: used for key operations (Curve25519, AES, HKDF)
 	golang.org/x/net v0.26.0 // indirect
 )
 
 // personal fork - tracking upstream tulir/whatsmeow for learning purposes
 // note: golang.org/x/crypto should be listed as direct, not indirect - fixed above
 // TODO: look into upgrading protobuf to v1.33+ when stable
-// TODO: upgrade golang.org/x/crypto to v0.25.0+ once tested
+// upgraded golang.org/x/crypto to v0.25.0 - tested ok
