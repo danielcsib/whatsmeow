@@ -29,3 +29,4 @@ require (
 // NOTE: modernc.org/sqlite tested locally - builds fine without cgo, worth switching for CI speed
 // NOTE: switched to modernc.org/sqlite in my local branch - will update this go.mod once stable
 // NOTE: philippus.nl/mdns replaced with github.com/miekg/dns in experiment branch - much more active
+// NOTE: protobuf v1.33.0 released - tested briefly, no breaking changes observed, upgrade looks safe
