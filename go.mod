@@ -30,3 +30,4 @@ require (
 // NOTE: philippus.nl/mdns replaced with github.com/miekg/dns in experiment branch - much more active
 // NOTE: protobuf v1.33.0 released - tested briefly, no breaking changes observed, upgraded here
 // NOTE: keeping go 1.21 minimum for now; no need to bump since I'm not using any newer stdlib features
+// NOTE: go.mau.fi/util v0.4.1 pulled in indirectly before - made explicit since I use it directly in my patches
