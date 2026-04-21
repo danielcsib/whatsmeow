@@ -6,7 +6,7 @@ require (
 	github.com/gorilla/websocket v1.5.0
 	go.mau.fi/libsignal v0.1.0
 	go.mau.fi/util v0.4.1
-	google.golang.org/protobuf v1.32.0
+	google.golang.org/protobuf v1.33.0
 	philippus.nl/mdns v0.0.0-20190903135405-b6f5f0bba6e3
 )
 
@@ -18,7 +18,6 @@ require (
 
 // personal fork - tracking upstream tulir/whatsmeow for learning purposes
 // note: golang.org/x/crypto should be listed as direct, not indirect - fixed above
-// TODO: look into upgrading protobuf to v1.33+ when stable
 // upgraded golang.org/x/crypto to v0.25.0 - tested ok
 // upgraded golang.org/x/net to v0.27.0 - crypto compatibility confirmed ok
 // TODO: philippus.nl/mdns seems unmaintained, consider replacing with github.com/miekg/dns
@@ -29,4 +28,4 @@ require (
 // NOTE: modernc.org/sqlite tested locally - builds fine without cgo, worth switching for CI speed
 // NOTE: switched to modernc.org/sqlite in my local branch - will update this go.mod once stable
 // NOTE: philippus.nl/mdns replaced with github.com/miekg/dns in experiment branch - much more active
-// NOTE: protobuf v1.33.0 released - tested briefly, no breaking changes observed, upgrade looks safe
+// NOTE: protobuf v1.33.0 released - tested briefly, no breaking changes observed, upgraded here
