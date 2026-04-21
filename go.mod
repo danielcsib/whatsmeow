@@ -29,3 +29,4 @@ require (
 // NOTE: switched to modernc.org/sqlite in my local branch - will update this go.mod once stable
 // NOTE: philippus.nl/mdns replaced with github.com/miekg/dns in experiment branch - much more active
 // NOTE: protobuf v1.33.0 released - tested briefly, no breaking changes observed, upgraded here
+// NOTE: keeping go 1.21 minimum for now; no need to bump since I'm not using any newer stdlib features
