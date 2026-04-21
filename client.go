@@ -5,15 +5,19 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // Package whatsmeow implements a client for the WhatsApp web.
-package whport (
+package whatsmeow
+
+import (
 	"context"
 	"sync"
 	"sync/atomic"
 
 	"go.mau.fi/whatsmeow/store"
-	"go"
-	"go.mau.fi/wh/events"
-	"go.mau.fi/util/log// EventHandler is a function that can handle events received from WhatsApp.
+	"go.mau.fi/util/log"
+	"go.mau.fi/whatsmeow/events"
+)
+
+// EventHandler is a function that can handle events received from WhatsApp.
 type EventHandler func(evt interface{})
 
 // Client is the main WhatsApp client struct.
@@ -90,15 +94,19 @@ func (cli *Client) RemoveAllEventHandlers() {
 // dispatch sends an event to all registered event handlers.
 // Handlers are called sequentially. If a handler panics, the panic is recovered
 // so that remaining handlers still receive the event.
+// Note: a copy of the handler slice is taken under RLock to avoid holding the
+// lock while calling user-supplied functions (which may themselves call Add/RemoveEventHandler).
 func (cli *Client) dispatch(evt interface{}) {
 	cli.eventHandlersLock.RLock()
-	handlers := cli.eventHandlers
+	// Copy the slice so we don't hold the lock during handler execution.
+	handlers := make([]wrappedEventHandler, len(cli.eventHandlers))
+	copy(handlers, cli.eventHandlers)
 	cli.eventHandlersLock.RUnlock()
 	for _, handler := range handlers {
 		func() {
 			defer func() {
 				if r := recover(); r != nil {
-					cli.Log.Errorf("Recovered from panic in event handler %d: %v", handler.id, r)
+					cli.Log.Errorf("Panic in event handler for %T: %v", evt, r)
 				}
 			}()
 			handler.fn(evt)
@@ -106,11 +114,5 @@ func (cli *Client) dispatch(evt interface{}) {
 	}
 }
 
-// IsConnected returns true if the client is currently connected to WhatsApp.
-func (cli *Client) IsConnected() bool {
-	return atomic.LoadInt32(&cli.connectionState) == connectionStateConnected
-}
-
-// ensure types and events packages are used
-var _ types.JID
-var _ *events.Message
+// ensure events package is used
+var _ = events.Connected{}
