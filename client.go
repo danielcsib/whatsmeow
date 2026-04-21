@@ -4,10 +4,16 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// Package whats multiice client.
-package wh (
-	auatsmeow/types
-/whatsmeow/types/ events from WhatsApp.
+// Package whatsmeow implements a client for the WhatsApp web.
+package whport (
+	"context"
+	"sync"
+	"sync/atomic"
+
+	"go.mau.fi/whatsmeow/store"
+	"go"
+	"go.mau.fi/wh/events"
+	"go.mau.fi/util/log// EventHandler is a function that can handle events received from WhatsApp.
 type EventHandler func(evt interface{})
 
 // Client is the main WhatsApp client struct.
@@ -82,14 +88,21 @@ func (cli *Client) RemoveAllEventHandlers() {
 }
 
 // dispatch sends an event to all registered event handlers.
-// Note: handlers are called sequentially; if a handler panics it will stop
-// delivery to subsequent handlers. Consider recovering in your handler.
+// Handlers are called sequentially. If a handler panics, the panic is recovered
+// so that remaining handlers still receive the event.
 func (cli *Client) dispatch(evt interface{}) {
 	cli.eventHandlersLock.RLock()
 	handlers := cli.eventHandlers
 	cli.eventHandlersLock.RUnlock()
 	for _, handler := range handlers {
-		handler.fn(evt)
+		func() {
+			defer func() {
+				if r := recover(); r != nil {
+					cli.Log.Errorf("Recovered from panic in event handler %d: %v", handler.id, r)
+				}
+			}()
+			handler.fn(evt)
+		}()
 	}
 }
 
@@ -98,4 +111,6 @@ func (cli *Client) IsConnected() bool {
 	return atomic.LoadInt32(&cli.connectionState) == connectionStateConnected
 }
 
-// IsLo
+// ensure types and events packages are used
+var _ types.JID
+var _ *events.Message
